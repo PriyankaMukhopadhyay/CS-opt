@@ -164,7 +164,9 @@ for [P1_int,P2_int] in G_CS:
   P2_mat = ARR_MATRIX(P2)
   Q = P1_mat + P2_mat - np.matmul(P1_mat,P2_mat)
   for r in range(N2):
-    Pr = pauli_n[r]
+    r_decompose = quartDecompose(r)
+    Pr = ARR_MATRIX(r_decompose)
+    #Pr = pauli_n[r]
     tup = []
     mat_temp = np.matmul(np.matmul(Pr,Q),np.matmul(Pr,Q))
     val =(1/N)*( (5/8)*np.trace(pauli_n[0])+(1/8)*np.trace(mat_temp) )
@@ -176,7 +178,9 @@ for [P1_int,P2_int] in G_CS:
       for s in range(N2):
         if s == r:
           continue
-        Ps = pauli_n[s]
+        s_decompose = quartDecompose(s)
+        Ps = ARR_MATRIX(s_decompose)
+        #Ps = pauli_n[s]
         val =  (1/N)*( ((1+2j)/8)*np.trace(np.matmul(np.matmul(Pr,Ps),Q )) + ((1-2j)/8)*np.trace(np.matmul(np.matmul(Ps,Pr),Q ))
         + (1/8)*np.trace( np.matmul(np.matmul(Pr,Q),np.matmul(Ps,Q)) ) )
         val_real = val.real
